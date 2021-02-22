@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import { TextStyleVariantsMap } from '../../foundation/Text';
 
 const ButtonDefault = css`
     background-color: ${function(props) {
@@ -25,6 +26,9 @@ export const Button = styled.button`
     opacity: 1;
     transition: opacity ${({ theme }) => theme.transition};
     border-radius: ${({ theme }) => theme.borderRadius};
+
+    ${TextStyleVariantsMap.smallesException}
+
     ${function({ ghost }) {
         if (ghost) {
             return ButtonGhost;
