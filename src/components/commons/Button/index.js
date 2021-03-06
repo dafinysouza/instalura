@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 import { TextStyleVariantsMap } from '../../foundation/Text';
+import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 
 const ButtonDefault = css`
     background-color: ${function(props) {
@@ -39,4 +40,15 @@ export const Button = styled.button`
     &:focus {
         opacity: .5;
     }
+
+    ${breakpointsMedia({
+        xs: css`
+            /* All devices */
+            ${TextStyleVariantsMap.smallesException}
+        `,
+        md: css`
+            /* From md breakpoint */
+            ${TextStyleVariantsMap.paragraph1}
+        `,
+    })}
 `;
