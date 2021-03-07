@@ -5,19 +5,19 @@ import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const ButtonDefault = css`
-    background-color: ${function(props) {
-        return get(props.theme, `colors.${props.variant}.color`)
-    }};
-    color: ${function(props) {
-        return get(props.theme, `colors.${props.variant}.contrastText`)
-    }};
+    background-color: ${function (props) {
+    return get(props.theme, `colors.${props.variant}.color`);
+  }};
+    color: ${function (props) {
+    return get(props.theme, `colors.${props.variant}.contrastText`);
+  }};
 `;
 
 const ButtonGhost = css`
     background-color: transparent;
-    color: ${function(props) {
-        return get(props.theme, `colors.${props.variant}.color`)
-    }};
+    color: ${function (props) {
+    return get(props.theme, `colors.${props.variant}.color`);
+  }};
 `;
 
 export const Button = styled.button`
@@ -31,27 +31,27 @@ export const Button = styled.button`
 
     ${TextStyleVariantsMap.smallesException}
 
-    ${function({ ghost }) {
-        if (ghost) {
-            return ButtonGhost;
-        }
-        return ButtonDefault;
-    }}
+    ${function ({ ghost }) {
+    if (ghost) {
+      return ButtonGhost;
+    }
+    return ButtonDefault;
+  }}
     &:hover,
     &:focus {
         opacity: .5;
     }
 
     ${breakpointsMedia({
-        xs: css`
+    xs: css`
             /* All devices */
             ${TextStyleVariantsMap.smallesException}
         `,
-        md: css`
+    md: css`
             /* From md breakpoint */
             ${TextStyleVariantsMap.paragraph1}
         `,
-    })}
+  })}
 
     ${propToStyle('margin')}
     ${propToStyle('display')}

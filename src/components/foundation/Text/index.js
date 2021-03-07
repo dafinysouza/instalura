@@ -4,47 +4,50 @@ import styled, { css } from 'styled-components';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 
 export const TextStyleVariantsMap = {
-    paragraph1: css`
+  paragraph1: css`
         font-size: ${({ theme }) => theme.typographyVariants.paragraph1.fontSize};
         font-weight: ${({ theme }) => theme.typographyVariants.paragraph1.fontWeight};
         line-height: ${({ theme }) => theme.typographyVariants.paragraph1.lineHeight};
     `,
-    smallesException: css`
+  smallesException: css`
         font-size: ${({ theme }) => theme.typographyVariants.smallestException.fontSize};
         font-weight: ${({ theme }) => theme.typographyVariants.smallestException.fontWeight};
         line-height: ${({ theme }) => theme.typographyVariants.smallestException.lineHeight};
     `,
-}
-
-
+};
 
 const TextBase = styled.span`
-    ${function({ variant }) {
-        return TextStyleVariantsMap[variant];
-    }}
+    ${function ({ variant }) {
+    return TextStyleVariantsMap[variant];
+  }}
 
     ${propToStyle('textAlign')}
+    ${propToStyle('marginBottom')}
+    ${propToStyle('margin')}
 `;
 
-export default function Text({tag, variant, children, ...props}) {
-    return (
-        <TextBase
-            as={tag}
-            variant={variant}
-            {...props}
-        >
-            {children}
-        </TextBase> 
-    );
+export default function Text({
+  tag, variant, children, ...props
+}) {
+  return (
+    <TextBase
+      as={tag}
+      variant={variant}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
+      {children}
+    </TextBase>
+  );
 }
 
 Text.propTypes = {
-    tag: PropTypes.string.isRequired,
-    variant: PropTypes.string,
-    children: PropTypes.node.isRequired,
-}
+  tag: PropTypes.string,
+  variant: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 Text.defaultProps = {
-    tag: 'span',
-    variant: 'paragraph1',
+  tag: 'span',
+  variant: 'paragraph1',
 };
