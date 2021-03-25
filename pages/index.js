@@ -6,6 +6,7 @@ import { Button } from '../src/components/commons/Button';
 import { Grid } from '../src/components/foundation/layout/Grid';
 import Box from '../src/components/foundation/layout/Box';
 import Modal from '../src/components/commons/Modal';
+import FormRegister from '../src/components/patterns/FormRegister';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,15 +30,7 @@ export default function Home() {
         }}
       >
         {(propsModal) => (
-          <Box
-            backgroundColor="white"
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...propsModal}
-          >
-            <div>
-              Hello Modal!
-            </div>
-          </Box>
+          <FormRegister propsModal={propsModal} />
         )}
       </Modal>
 
