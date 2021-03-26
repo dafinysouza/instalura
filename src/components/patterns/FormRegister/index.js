@@ -41,8 +41,8 @@ function FormContent() {
 
         // Data Transfer Object
         const userDTO = {
-          username: userInfo.usuario,
-          name: userInfo.nome,
+          username: userInfo.user,
+          name: userInfo.name,
         };
 
         fetch('https://instalura-api.vercel.app/api/users', {
@@ -52,17 +52,17 @@ function FormContent() {
           },
           body: JSON.stringify(userDTO),
         })
-          .then((respostaDoServidor) => {
-            if (respostaDoServidor.ok) {
-              return respostaDoServidor.json();
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
             }
 
             throw new Error('Não foi possível cadastrar o usuário agora :(');
           })
-          .then((respostaConvertidaEmObjeto) => {
+          .then((response) => {
             setSubmissionStatus(formStates.DONE);
             // eslint-disable-next-line no-console
-            console.log(respostaConvertidaEmObjeto);
+            console.log(response);
           })
           .catch((error) => {
             setSubmissionStatus(formStates.ERROR);
