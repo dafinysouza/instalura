@@ -5,19 +5,13 @@ import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const ButtonDefault = css`
-    background-color: ${function (props) {
-    return get(props.theme, `colors.${props.variant}.color`);
-  }};
-    color: ${function (props) {
-    return get(props.theme, `colors.${props.variant}.contrastText`);
-  }};
+    background-color: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
+    color: ${(props) => get(props.theme, `colors.${props.variant}.contrastText`)};
 `;
 
 const ButtonGhost = css`
     background-color: transparent;
-    color: ${function (props) {
-    return get(props.theme, `colors.${props.variant}.color`);
-  }};
+    color: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
 `;
 
 export const Button = styled.button`
@@ -31,7 +25,7 @@ export const Button = styled.button`
 
     ${TextStyleVariantsMap.smallesException}
 
-    ${function ({ ghost }) {
+    ${({ ghost }) => {
     if (ghost) {
       return ButtonGhost;
     }
