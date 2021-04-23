@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import { TextStyleVariantsMap } from '../../foundation/Text';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
-import { Link } from '../Link';
+import Link from '../Link';
 
 const ButtonDefault = css`
     background-color: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
@@ -63,15 +63,21 @@ const ButtonWrapper = styled.button`
   ${propToStyle('display')}
 `;
 
-export const Button = ({ href, ...props }) => {
-  const isLink = Boolean(href);
-  const componentTag = isLink ? Link : 'button';
+export function Button({ href, children, ...props }) {
+  const hasHref = Boolean(href);
+  const tag = hasHref ? Link : 'button';
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <ButtonWrapper as={componentTag} href={href} {...props} />
+    <ButtonWrapper
+      as={tag}
+      href={href}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
+      {children}
+    </ButtonWrapper>
   );
-};
+}
 
 Button.defaultProps = {
   href: undefined,
@@ -79,4 +85,5 @@ Button.defaultProps = {
 
 Button.propTypes = {
   href: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
