@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import { Button } from '../../commons/Button';
@@ -9,29 +10,38 @@ import { loginService } from '../../../services/login/loginService';
 const loginSchema = yup.object().shape({
   usuario: yup
     .string()
-    .required('"Usuário" é obrigatório')
+    .required('"Usuario" é obrigatório')
     .min(3, 'Preencha ao menos 3 caracteres'),
   senha: yup
     .string()
-    .required('"Senha" é obrigatório')
+    .required('"Senha" é obrigatória')
     .min(8, 'Sua senha precisa ter ao menos 8 caracteres'),
 });
 
-export default function LoginForm() {
+export default function LoginForm({ onSubmit }) {
   const router = useRouter();
   const initialValues = {
     usuario: '',
     senha: '',
   };
+
   const form = useForm({
     initialValues,
     onSubmit: (values) => {
+      form.setIsFormDisabled(true);
       loginService.login({
         username: values.usuario, // 'dafinysouza'
         password: values.senha, // 'senhasegura'
       })
         .then(() => {
           router.push('/app/profile');
+        })
+        .catch((err) => {
+          // Desafio: Mostrar o erro na tela
+          console.error(err);
+        })
+        .finally(() => {
+          form.setIsFormDisabled(false);
         });
     },
     async validateSchema(values) {
@@ -42,7 +52,7 @@ export default function LoginForm() {
   });
 
   return (
-    <form id="formRegister" onSubmit={form.handleSubmit}>
+    <form id="formRegister" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="usuario"
@@ -78,3 +88,11 @@ export default function LoginForm() {
     </form>
   );
 }
+
+LoginForm.defaultProps = {
+  onSubmit: undefined,
+};
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func,
+};
